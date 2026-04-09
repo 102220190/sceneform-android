@@ -20,7 +20,7 @@ appcompat_version = "1.7.1"
 fragment_version = "1.8.8"
 constraintlayout_version = "2.2.1"
 
-filament_version = "1.70.2"
+filament_version = "1.65.1"
 arcore_version = "1.50.0"
 fuel_version = "2.3.1"
 
