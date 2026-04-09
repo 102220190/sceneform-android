@@ -99,7 +99,14 @@ fun KTX1Loader.loadEnvironmentAsync(
 fun KTX1Loader.createEnvironment(
     iblKtxBuffer: Buffer?,
     skyboxKtxBuffer: Buffer? = null
-) = KTXEnvironment(
-    indirectLight = iblKtxBuffer?.let { createIndirectLight(Filament.engine, it) },
-    sphericalHarmonics = iblKtxBuffer?.rewind()?.let { getSphericalHarmonics(it) },
-    skybox = skyboxKtxBuffer?.let { createSkybox(Filament.engine, it) })
+): Environment {
+    val indirectLightBundle = iblKtxBuffer?.let { createIndirectLight(Filament.engine, it) }
+    val sphericalHarmonics = iblKtxBuffer?.rewind()?.let { getSphericalHarmonics(it) }
+    val skyboxBundle = skyboxKtxBuffer?.let { createSkybox(Filament.engine, it) }
+
+    return KTXEnvironment(
+        indirectLight = indirectLightBundle?.indirectLight,
+        sphericalHarmonics = sphericalHarmonics,
+        skybox = skyboxBundle?.skybox
+    )
+}
